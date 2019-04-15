@@ -12,7 +12,6 @@ F.init();
 
 const app = Elm.Main.init({
   flags: loggedIn,
-  node: document.getElementById('root'),
 });
 
 if (!loggedIn) {
