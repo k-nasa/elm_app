@@ -5,6 +5,7 @@ import Browser.Navigation as Nav
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Page.Login
+import Port exposing (loading, receivedLoggedIn)
 import Route exposing (Route, parse)
 import Url exposing (Url)
 
@@ -15,7 +16,7 @@ main =
         { view = view
         , init = init
         , update = update
-        , subscriptions = always Sub.none
+        , subscriptions = subscriptions
         , onUrlChange = UrlChanged
         , onUrlRequest = LinkClicked
         }
@@ -26,13 +27,21 @@ init flags url key =
     case flags of
         True ->
             -- どうせgoToでmodel.pageは書き換わるのでNotFoundで仮置き
-            Model NotFound key
-                |> goTo (Route.parse url)
+            Model NotFound key False
+                |> redirectTopPage
 
         False ->
             -- どうせredirectSignUpPageでmodel.pageは書き換わるのでNotFoundで仮置き
-            Model NotFound key
+            Model NotFound key False
                 |> redirectSignUpPage
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.batch
+        [ receivedLoggedIn ReceivedLoggedIn
+        , loading Loading
+        ]
 
 
 
@@ -49,6 +58,7 @@ type Page
 type alias Model =
     { page : Page
     , key : Nav.Key
+    , loading : Bool
     }
 
 
@@ -62,6 +72,7 @@ type Msg
     | UrlChanged Url.Url
     | LoginMsg Page.Login.Msg
     | ReceivedLoggedIn ()
+    | Loading Bool
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -97,6 +108,9 @@ update msg model =
 
         NoOp ->
             ( model, Cmd.none )
+
+        Loading bool ->
+            ( { model | loading = bool }, Cmd.none )
 
 
 goTo : Maybe Route -> Model -> ( Model, Cmd Msg )
@@ -135,12 +149,23 @@ view : Model -> Browser.Document Msg
 view model =
     { title = "ankipan"
     , body =
-        [ case model.page of
-            LoginPage loginModel ->
-                Page.Login.view loginModel
-                    |> Html.map LoginMsg
+        [ viewLoading model
+            (case model.page of
+                LoginPage loginModel ->
+                    Page.Login.view loginModel
+                        |> Html.map LoginMsg
 
-            _ ->
-                text "unimplement"
+                _ ->
+                    text "unimplement"
+            )
         ]
     }
+
+
+viewLoading : Model -> Html Msg -> Html Msg
+viewLoading model content =
+    if model.loading then
+        text "loading..."
+
+    else
+        content
