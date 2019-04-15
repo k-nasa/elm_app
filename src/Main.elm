@@ -4,6 +4,7 @@ import Browser
 import Browser.Navigation as Nav
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Page.Login
 import Route exposing (Route, parse)
 import Url exposing (Url)
 
@@ -15,8 +16,8 @@ main =
         , init = init
         , update = update
         , subscriptions = always Sub.none
-        , onUrlChange = always NoOp
-        , onUrlRequest = always NoOp
+        , onUrlChange = UrlChanged
+        , onUrlRequest = LinkClicked
         }
 
 
@@ -42,6 +43,7 @@ type Page
     = NotFound
     | TopPage
     | AboutPage
+    | LoginPage Page.Login.Model
 
 
 type alias Model =
@@ -58,6 +60,7 @@ type Msg
     = NoOp
     | LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
+    | LoginMsg Page.Login.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -74,7 +77,21 @@ update msg model =
         UrlChanged url ->
             goTo (Route.parse url) model
 
-        _ ->
+        LoginMsg loginMsg ->
+            case model.page of
+                LoginPage loginModel ->
+                    let
+                        ( newTopModel, topCmd ) =
+                            Page.Login.update loginMsg loginModel
+                    in
+                    ( { model | page = LoginPage newTopModel }
+                    , Cmd.map LoginMsg topCmd
+                    )
+
+                _ ->
+                    ( model, Cmd.none )
+
+        NoOp ->
             ( model, Cmd.none )
 
 
@@ -92,6 +109,9 @@ goTo maybeRoute model =
         Just Route.About ->
             ( { model | page = AboutPage }, Cmd.none )
 
+        Just Route.Login ->
+            ( { model | page = LoginPage Page.Login.init }, Cmd.none )
+
 
 redirectSignUpPage : Model -> ( Model, Cmd Msg )
 redirectSignUpPage model =
@@ -106,5 +126,12 @@ view : Model -> Browser.Document Msg
 view model =
     { title = "ankipan"
     , body =
-        []
+        [ case model.page of
+            LoginPage loginModel ->
+                Page.Login.view loginModel
+                    |> Html.map LoginMsg
+
+            _ ->
+                text "unimplement"
+        ]
     }
