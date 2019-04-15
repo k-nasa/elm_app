@@ -1,8 +1,24 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), init, main, update, view)
 
 import Browser
-import Html exposing (Html, text, div, h1, img)
-import Html.Attributes exposing (src)
+import Html exposing (..)
+import Html.Attributes exposing (..)
+
+
+main : Program () Model Msg
+main =
+    Browser.element
+        { view = view
+        , init = \_ -> init
+        , update = update
+        , subscriptions = always Sub.none
+        }
+
+
+init : ( Model, Cmd Msg )
+init =
+    ( {}, Cmd.none )
+
 
 
 ---- MODEL ----
@@ -10,11 +26,6 @@ import Html.Attributes exposing (src)
 
 type alias Model =
     {}
-
-
-init : ( Model, Cmd Msg )
-init =
-    ( {}, Cmd.none )
 
 
 
@@ -40,17 +51,3 @@ view model =
         [ img [ src "/logo.svg" ] []
         , h1 [] [ text "Your Elm App is working!" ]
         ]
-
-
-
----- PROGRAM ----
-
-
-main : Program () Model Msg
-main =
-    Browser.element
-        { view = view
-        , init = \_ -> init
-        , update = update
-        , subscriptions = always Sub.none
-        }
