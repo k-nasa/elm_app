@@ -23,19 +23,7 @@ export function init() {
 }
 
 export function fetchFirebaseRedirectResult() {
-  firebase
-    .auth()
-    .getRedirectResult()
-    .then(function(result) {
-      if (result.credential) {
-        var token = result.credential.accessToken;
-      }
-      var uid = result.user.uid;
-      console.log(uid);
-
-      localStorage.setItem('uid', uid);
-    })
-    .catch(function(error) {});
+  return firebase.auth().getRedirectResult();
 }
 
 function loginWithFirebase(provider) {
