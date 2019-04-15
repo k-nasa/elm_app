@@ -61,6 +61,7 @@ type Msg
     | LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
     | LoginMsg Page.Login.Msg
+    | ReceivedLoggedIn ()
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -91,6 +92,9 @@ update msg model =
                 _ ->
                     ( model, Cmd.none )
 
+        ReceivedLoggedIn _ ->
+            redirectTopPage model
+
         NoOp ->
             ( model, Cmd.none )
 
@@ -116,6 +120,11 @@ goTo maybeRoute model =
 redirectSignUpPage : Model -> ( Model, Cmd Msg )
 redirectSignUpPage model =
     ( model, Nav.pushUrl model.key "sign_up" )
+
+
+redirectTopPage : Model -> ( Model, Cmd Msg )
+redirectTopPage model =
+    ( model, Nav.pushUrl model.key "top" )
 
 
 
