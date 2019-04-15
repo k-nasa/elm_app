@@ -8,7 +8,7 @@ import Route exposing (Route, parse)
 import Url exposing (Url)
 
 
-main : Program () Model Msg
+main : Program Bool Model Msg
 main =
     Browser.application
         { view = view
@@ -20,11 +20,18 @@ main =
         }
 
 
-init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
+init : Bool -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
-    -- どうせgoToでmodel.pageは書き換わるのでNotFoundで仮置き
-    Model NotFound key
-        |> goTo (Route.parse url)
+    case flags of
+        True ->
+            -- どうせgoToでmodel.pageは書き換わるのでNotFoundで仮置き
+            Model NotFound key
+                |> goTo (Route.parse url)
+
+        False ->
+            -- どうせredirectSignUpPageでmodel.pageは書き換わるのでNotFoundで仮置き
+            Model NotFound key
+                |> redirectSignUpPage
 
 
 
@@ -84,6 +91,11 @@ goTo maybeRoute model =
 
         Just Route.About ->
             ( { model | page = AboutPage }, Cmd.none )
+
+
+redirectSignUpPage : Model -> ( Model, Cmd Msg )
+redirectSignUpPage model =
+    ( model, Nav.pushUrl model.key "sign_up" )
 
 
 
