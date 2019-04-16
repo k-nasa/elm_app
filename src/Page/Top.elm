@@ -28,8 +28,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div [ class "container" ]
-        [ viewSideBar
-        , div [ id "top-page" ] [ viewContainer ]
+        [ div [ id "top-page" ] [ viewContainer ]
         ]
 
 
@@ -66,22 +65,5 @@ viewContainer =
                 [ i [ class "fas fa-plus" ] []
                 , text "学習カードを追加"
                 ]
-            ]
-        ]
-
-
-viewSideBar : Html Msg
-viewSideBar =
-    div [ id "sidebar" ]
-        [ div [ class "sidebar-menue" ]
-            [ ul []
-                [ li [] [ a [ href "#" ] [ text "カードを編集" ] ]
-                , li [] [ a [ href "#" ] [ text "学習記録" ] ]
-                , li [] [ a [ href "#" ] [ text "設定" ] ]
-                , li [] [ a [ href "#" ] [ text "ヘルプ" ] ]
-                , li [] [ a [ href "#" ] [ text "ログアウト" ] ]
-                , li [] [ a [ href "#" ] [ text "要望" ] ]
-                ]
-            , a [ href "https://twitter.com/intent/tweet?text=%E3%82%A2%E3%83%B3%E3%82%AD%E3%83%91%E3%83%B3%E3%81%A0%E3%81%8A", target "_bulk" ] [ text "ツイート" ]
             ]
         ]
