@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP');
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.container {
+  display: flex;
+}
+
+#sidebar {
+  width: 30%;
+  text-align: center;
+
+  li {
+    list-style: none;
+  }
+}
+
+@import 'styles/top_page';
