@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP');
+
+@mixin pc {
+  @media (min-width: 761px) {
+    @content;
+  }
+}
+
+@mixin sp {
+  @media (max-width: 760px) {
+    @content;
+  }
+}
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  margin: 0px;
+}
+
+.container {
+  display: flex;
+}
+
+#sidebar {
+  width: 400px;
+  border-right: 1px solid #c4c4c4;
+  ul {
+    padding: 40px;
+    font-size: 24px;
+    font-weight: normal;
+    li {
+      list-style: none;
+      border-bottom: 1px solid #c4c4c4;
+      padding-bottom: 5px;
+
+      a {
+        text-decoration: none;
+        color: #000;
+      }
+    }
+  }
+}
+
+@import 'styles/top_page';
