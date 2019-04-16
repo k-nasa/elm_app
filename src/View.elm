@@ -53,7 +53,7 @@ viewLoading model content =
 
 viewMain : String -> Html Msg -> Html Msg
 viewMain id_ viewContainer =
-    div [ class "container" ]
+    div [ class "main-container" ]
         [ viewSideBar
         , div [ id id_ ] [ viewContainer ]
         ]
