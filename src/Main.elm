@@ -9,7 +9,7 @@ import Page.Login
 import Page.Top
 import Port exposing (loading, receivedLoggedIn)
 import Route exposing (Route, parse)
-import Update exposing (Msg(..), redirectSignUpPage, redirectTopPage, update)
+import Update exposing (Msg(..), goTo, redirectSignUpPage, redirectTopPage, update)
 import Url exposing (Url)
 import View exposing (view)
 
@@ -32,10 +32,9 @@ init flags url key =
         True ->
             -- どうせgoToでmodel.pageは書き換わるのでNotFoundで仮置き
             Model NotFound key False
-                |> redirectTopPage
+                |> goTo (Route.parse url)
 
         False ->
-            -- どうせredirectSignUpPageでmodel.pageは書き換わるのでNotFoundで仮置き
             Model NotFound key False
                 |> redirectSignUpPage
 
