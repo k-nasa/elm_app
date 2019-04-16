@@ -6,10 +6,14 @@
   "license": "MIT",
   "scripts": {
     "build": "elm-app build",
-    "start": "elm-app start"
+    "start": "elm-app start",
+    "sass-watch": "sass --watch src/style.scss src/main.css"
   },
   "dependencies": {
     "create-elm-app": "^3.0.6",
     "firebase": "^5.9.4"
+  },
+  "devDependencies": {
+    "sass": "^1.18.0"
   }
 }
