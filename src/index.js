@@ -26,6 +26,11 @@ app.ports.signInWithGitHub.subscribe(function() {
   F.signInWithGithub();
 });
 
+app.ports.clearLocalStorageUid.subscribe(function() {
+  localStorage.removeItem(storageKey);
+  location.reload();
+});
+
 async function fetchRedirectResult() {
   app.ports.loading.send(true);
   const result = await F.fetchFirebaseRedirectResult();

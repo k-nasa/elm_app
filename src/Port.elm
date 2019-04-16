@@ -1,10 +1,13 @@
-port module Port exposing (loading, receivedLoggedIn, signInWithGitHub, signInWithGoogle)
+port module Port exposing (clearLocalStorageUid, loading, receivedLoggedIn, signInWithGitHub, signInWithGoogle)
 
 
 port signInWithGoogle : () -> Cmd msg
 
 
 port signInWithGitHub : () -> Cmd msg
+
+
+port clearLocalStorageUid : () -> Cmd msg
 
 
 port receivedLoggedIn : (() -> msg) -> Sub msg
