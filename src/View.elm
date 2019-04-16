@@ -57,7 +57,8 @@ viewSideBar =
     div [ id "sidebar" ]
         [ div [ class "sidebar-menue" ]
             [ ul []
-                [ li []
+                [ li [ class "unborder" ] [ a [ href "/" ] [ img [ src "%PUBLIC_URL%/assets/images/icon.jpeg", width 100, height 100 ] [] ] ]
+                , li []
                     [ a [ href "#" ]
                         [ i [ class "fas fa-edit" ] []
                         , text "カードを編集"
@@ -87,7 +88,7 @@ viewSideBar =
                         , text "ログアウト"
                         ]
                     ]
-                , li []
+                , li [ class "unborder" ]
                     [ a [ href "#" ]
                         [ i [ class "fas fa-phone" ] []
                         , text "要望"

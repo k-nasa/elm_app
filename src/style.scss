@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP');
-
+// @import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP');
+@import url('http://mplus-fonts.sourceforge.jp/webfonts/general-j/mplus_webfonts.css');
 @mixin pc {
   @media (min-width: 761px) {
     @content;
@@ -13,7 +13,7 @@
 }
 
 body {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'M+ Type-1 (general-j) Regular', 'Noto Sans JP', sans-serif;
   margin: 0px;
 }
 
@@ -22,16 +22,17 @@ body {
 }
 
 #sidebar {
-  width: 400px;
+  width: 450px;
   border-right: 1px solid #c4c4c4;
   ul {
     padding-top: 40px;
-    font-size: 24px;
-    font-weight: normal;
+    padding-left: 10px;
+    font-size: 20px;
+
     li {
       list-style: none;
       border-bottom: 1px solid #c4c4c4;
-      padding-bottom: 5px;
+      margin-bottom: 10px;
 
       i {
         margin-right: 10px;
@@ -40,9 +41,24 @@ body {
 
       a {
         text-decoration: none;
+        font-weight: 200;
 
         color: #353535;
+
+        &:hover {
+          color: #999999;
+        }
       }
+    }
+    li.unborder {
+      border-bottom: none;
+    }
+
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      border-bottom: none;
     }
   }
 }
