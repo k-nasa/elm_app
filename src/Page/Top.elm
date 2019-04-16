@@ -62,7 +62,10 @@ viewContainer =
                 ]
             ]
         , div [ class "footer-button" ]
-            [ a [ href "#" ] [ text "学習カードを追加" ]
+            [ a [ href "#", class "lerge-plus-button" ]
+                [ i [ class "fas fa-plus" ] []
+                , text "学習カードを追加"
+                ]
             ]
         ]
 
