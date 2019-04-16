@@ -12,19 +12,21 @@ view : Model -> Browser.Document Msg
 view model =
     { title = "ankipan"
     , body =
-        [ viewLoading model
-            (case model.page of
-                LoginPage loginModel ->
-                    Page.Login.view loginModel
-                        |> Html.map LoginMsg
+        [ main_ []
+            [ viewLoading model
+                (case model.page of
+                    LoginPage loginModel ->
+                        Page.Login.view loginModel
+                            |> Html.map LoginMsg
 
-                TopPage topModel ->
-                    Page.Top.view topModel
-                        |> Html.map TopMsg
+                    TopPage topModel ->
+                        Page.Top.view topModel
+                            |> Html.map TopMsg
 
-                _ ->
-                    text "unimplement"
-            )
+                    _ ->
+                        text "unimplement"
+                )
+            ]
         ]
     }
 

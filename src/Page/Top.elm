@@ -35,11 +35,32 @@ view model =
 
 viewContainer : Html Msg
 viewContainer =
-    div [ class "top-page-container" ]
-        [ a [ href "#" ] [ text "学習を始める" ]
-        , p [] [ text "学習すべきカード" ]
-        , div [] [ text "新しいカード" ]
-        , div [] [ text "復習すべきカード" ]
+    div []
+        [ div [ class "top-page-container" ]
+            [ a [ class "lerge-start-button", href "#" ]
+                [ i [ class "fas fa-laptop-code" ] []
+                , text "学習を始める"
+                ]
+            , p [ class "sub-caption" ] [ text "学習すべきカード" ]
+            , div [ class "card-description" ]
+                [ div [ class "new-card-container" ]
+                    [ p [ class "caption" ]
+                        [ text "新しい"
+                        , br [] []
+                        , text "カード"
+                        ]
+                    , p [ class "number" ] [ text "4" ]
+                    ]
+                , div [ class "review-card-container" ]
+                    [ p [ class "caption" ]
+                        [ text "復習すべき"
+                        , br [] []
+                        , text "カード"
+                        ]
+                    , p [ class "number" ] [ text "4" ]
+                    ]
+                ]
+            ]
         , div [ class "footer-button" ]
             [ a [ href "#" ] [ text "学習カードを追加" ]
             ]
@@ -57,7 +78,7 @@ viewSideBar =
                 , li [] [ a [ href "#" ] [ text "ヘルプ" ] ]
                 , li [] [ a [ href "#" ] [ text "ログアウト" ] ]
                 , li [] [ a [ href "#" ] [ text "要望" ] ]
-                , a [ href "https://twitter.com/intent/tweet?text=%E3%82%A2%E3%83%B3%E3%82%AD%E3%83%91%E3%83%B3%E3%81%A0%E3%81%8A", target "_bulk" ] [ text "ツイート" ]
                 ]
+            , a [ href "https://twitter.com/intent/tweet?text=%E3%82%A2%E3%83%B3%E3%82%AD%E3%83%91%E3%83%B3%E3%81%A0%E3%81%8A", target "_bulk" ] [ text "ツイート" ]
             ]
         ]
