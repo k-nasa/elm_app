@@ -22,11 +22,22 @@ body {
 }
 
 #sidebar {
-  width: 30%;
-  text-align: center;
+  width: 400px;
+  border-right: 1px solid #c4c4c4;
+  ul {
+    padding: 40px;
+    font-size: 24px;
+    font-weight: normal;
+    li {
+      list-style: none;
+      border-bottom: 1px solid #c4c4c4;
+      padding-bottom: 5px;
 
-  li {
-    list-style: none;
+      a {
+        text-decoration: none;
+        color: #000;
+      }
+    }
   }
 }
 
