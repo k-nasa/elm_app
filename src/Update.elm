@@ -5,6 +5,7 @@ import Browser.Navigation as Nav
 import Model exposing (Model, Page(..))
 import Page.Login
 import Page.Top
+import Port exposing (clearLocalStorageUid)
 import Route exposing (Route)
 import Url
 
@@ -17,6 +18,7 @@ type Msg
     | TopMsg Page.Top.Msg
     | ReceivedLoggedIn ()
     | Loading Bool
+    | ClearLocalStorageUid
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -63,6 +65,9 @@ update msg model =
 
         ReceivedLoggedIn _ ->
             redirectTopPage model
+
+        ClearLocalStorageUid ->
+            ( model, Port.clearLocalStorageUid () )
 
         NoOp ->
             ( model, Cmd.none )
