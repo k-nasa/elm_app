@@ -8,6 +8,7 @@ type Route
     = Top
     | About
     | Login
+    | AddCard
 
 
 parse : Url -> Maybe Route
@@ -22,4 +23,5 @@ parser =
         , map About (s "about")
         , map Login (s "login")
         , map Login (s "sign_up")
+        , map AddCard (s "add_card")
         ]

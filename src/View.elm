@@ -5,6 +5,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Model exposing (Model, Page(..))
+import Page.AddCard
 import Page.Login
 import Page.Top
 import Update exposing (Msg(..))
@@ -25,6 +26,12 @@ view model =
                         viewMain "top-page"
                             (Page.Top.view topModel
                                 |> Html.map TopMsg
+                            )
+
+                    AddCardPage pageModel ->
+                        viewMain "top-page"
+                            (Page.AddCard.view pageModel
+                                |> Html.map AddCardMsg
                             )
 
                     _ ->
