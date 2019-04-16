@@ -5,7 +5,7 @@
   "author": "k-nasa <htilcs1115@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "elm-app build",
+    "build": "elm-app build && yarn sass-build",
     "start": "elm-app start",
     "sass-watch": "sass --watch src/style.scss src/main.css",
     "sass-build": "sass src/style.scss src/main.css"
