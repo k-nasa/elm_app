@@ -14,3 +14,5 @@ node_modules
 .DS_Store
 yarn.lock
 package-lock.json
+src/main.css.map
+src/main.css
