@@ -27,34 +27,36 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [ id "top-page" ]
+    div [ class "container" ]
         [ viewSideBar
-        , viewContainer
+        , div [ id "top-page" ] [ viewContainer ]
         ]
 
 
 viewContainer : Html Msg
 viewContainer =
     div [ class "top-page-container" ]
-        [ a [] [ text "学習を始める" ]
+        [ a [ href "#" ] [ text "学習を始める" ]
         , p [] [ text "学習すべきカード" ]
         , div [] [ text "新しいカード" ]
         , div [] [ text "復習すべきカード" ]
-        , div [ class "footer-button" ] [ a [] [ text "学習カードを追加" ] ]
+        , div [ class "footer-button" ]
+            [ a [ href "#" ] [ text "学習カードを追加" ]
+            ]
         ]
 
 
 viewSideBar : Html Msg
 viewSideBar =
-    div [ class "sidebar" ]
+    div [ id "sidebar" ]
         [ div [ class "sidebar-menue" ]
             [ ul []
-                [ li [] [ a [] [ text "カードを編集" ] ]
-                , li [] [ a [] [ text "学習記録" ] ]
-                , li [] [ a [] [ text "設定" ] ]
-                , li [] [ a [] [ text "ヘルプ" ] ]
-                , li [] [ a [] [ text "ログアウト" ] ]
-                , li [] [ a [] [ text "要望" ] ]
+                [ li [] [ a [ href "#" ] [ text "カードを編集" ] ]
+                , li [] [ a [ href "#" ] [ text "学習記録" ] ]
+                , li [] [ a [ href "#" ] [ text "設定" ] ]
+                , li [] [ a [ href "#" ] [ text "ヘルプ" ] ]
+                , li [] [ a [ href "#" ] [ text "ログアウト" ] ]
+                , li [] [ a [ href "#" ] [ text "要望" ] ]
                 , a [ href "https://twitter.com/intent/tweet?text=%E3%82%A2%E3%83%B3%E3%82%AD%E3%83%91%E3%83%B3%E3%81%A0%E3%81%8A", target "_bulk" ] [ text "ツイート" ]
                 ]
             ]
