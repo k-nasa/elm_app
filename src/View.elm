@@ -29,7 +29,7 @@ view model =
                             )
 
                     AddCardPage pageModel ->
-                        viewMain "top-page"
+                        viewMain "add-card-page"
                             (Page.AddCard.view pageModel
                                 |> Html.map AddCardMsg
                             )
