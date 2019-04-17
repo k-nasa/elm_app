@@ -17,7 +17,7 @@ body {
   margin: 0px;
 }
 
-.container {
+.main-container {
   display: flex;
 }
 
@@ -63,3 +63,4 @@ body {
 }
 
 @import 'styles/top_page';
+@import 'styles/add_card_page';

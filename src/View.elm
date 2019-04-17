@@ -5,6 +5,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Model exposing (Model, Page(..))
+import Page.AddCard
 import Page.Login
 import Page.Top
 import Update exposing (Msg(..))
@@ -27,6 +28,12 @@ view model =
                                 |> Html.map TopMsg
                             )
 
+                    AddCardPage pageModel ->
+                        viewMain "add-card-page"
+                            (Page.AddCard.view pageModel
+                                |> Html.map AddCardMsg
+                            )
+
                     _ ->
                         text "unimplement"
                 )
@@ -46,7 +53,7 @@ viewLoading model content =
 
 viewMain : String -> Html Msg -> Html Msg
 viewMain id_ viewContainer =
-    div [ class "container" ]
+    div [ class "main-container" ]
         [ viewSideBar
         , div [ id id_ ] [ viewContainer ]
         ]
