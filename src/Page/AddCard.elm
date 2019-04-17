@@ -12,11 +12,20 @@ init =
 
 
 type alias Model =
-    {}
+    { questionText : String
+    , answerText : String
+    , memo : String
+    , errors : Errors
+    }
+
+    }
 
 
 type Msg
-    = NoOp
+    = Submit
+    | InputQuestion String
+    | InputAnswer String
+    | InputMemo String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -29,7 +38,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div [ id "add-card-page" ]
-        [ form [ class "card-form", onClick NoOp ]
+        [ form [ class "card-form", onSubmit Submit ]
             [ div [ class "form-header" ]
                 [ button [ class "lerge-plus-button" ]
                     [ i [ class "fas fa-plus" ] []
@@ -39,16 +48,26 @@ view model =
                     [ i [ class "fas fa-times" ] []
                     ]
                 ]
-            , div [ class "card-form-item" ]
-                [ p [ class "form-caption" ] [ text "問題文" ]
-                , textarea [ class "form-control", placeholder "問題文を入力してください" ] []
-                ]
-            , div [ class "card-form-item" ]
-                [ p [ class "form-caption" ] [ text "回答文" ]
-                , textarea [ class "form-control", placeholder "答えを入力してください" ] []
-                ]
-            , div [ class "card-form-item" ]
-                [ input [ class "form-control", type_ "text", placeholder "メモ" ] []
+            , div [ class "form-group" ]
+                [ div [ class "card-form-item" ]
+                    [ div [ class "form-item" ]
+                        [ label [ class "form-caption" ] [ text "問題文" ]
+                        , textarea [ class ("form-control " ++ hasError model.errors.questionText), placeholder "問題文を入力してください", onInput InputQuestion, value model.questionText ] []
+                        , div [ class "invalid-feedback" ] [ text model.errors.questionText ]
+                        ]
+                    ]
+                , div [ class "card-form-item" ]
+                    [ div [ class "form-item" ]
+                        [ label [ class "form-caption" ] [ text "回答文" ]
+                        , textarea [ class ("form-control " ++ hasError model.errors.answerText), placeholder "答えを入力してください", onInput InputAnswer, value model.answerText ] []
+                        , div [ class "invalid-feedback" ] [ text model.errors.answerText ]
+                        ]
+                    ]
+                , div [ class "card-form-item" ]
+                    [ div [ class "form-item" ]
+                        [ input [ class "form-control", type_ "text", placeholder "メモ", onInput InputMemo, value model.memo ] []
+                        ]
+                    ]
                 ]
             ]
         ]
