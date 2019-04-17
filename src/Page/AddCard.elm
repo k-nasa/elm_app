@@ -35,7 +35,7 @@ view model =
                     [ i [ class "fas fa-plus" ] []
                     , text "学習カードを追加"
                     ]
-                , a [ href "/", class "lerge-plus-button" ]
+                , a [ href "/", class "close-button" ]
                     [ i [ class "fas fa-times" ] []
                     ]
                 ]
