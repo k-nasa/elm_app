@@ -18,8 +18,10 @@ body {
   background: #eeeeee;
 }
 
-.main-container {
-  display: flex;
+@include pc {
+  .main-container {
+    display: flex;
+  }
 }
 
 #sidebar {
