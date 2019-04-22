@@ -15,29 +15,27 @@ view : Model -> Browser.Document Msg
 view model =
     { title = "ankipan"
     , body =
-        [ main_ []
-            [ viewLoading model
-                (case model.page of
-                    LoginPage loginModel ->
-                        Page.Login.view loginModel
-                            |> Html.map LoginMsg
+        [ viewLoading model
+            (case model.page of
+                LoginPage loginModel ->
+                    Page.Login.view loginModel
+                        |> Html.map LoginMsg
 
-                    TopPage topModel ->
-                        viewMain "top-page"
-                            (Page.Top.view topModel
-                                |> Html.map TopMsg
-                            )
+                TopPage topModel ->
+                    viewMain "top-page"
+                        (Page.Top.view topModel
+                            |> Html.map TopMsg
+                        )
 
-                    AddCardPage pageModel ->
-                        viewMain "add-card-page"
-                            (Page.AddCard.view pageModel
-                                |> Html.map AddCardMsg
-                            )
+                AddCardPage pageModel ->
+                    viewMain "add-card-page"
+                        (Page.AddCard.view pageModel
+                            |> Html.map AddCardMsg
+                        )
 
-                    _ ->
-                        text "unimplement"
-                )
-            ]
+                _ ->
+                    text "unimplement"
+            )
         ]
     }
 
@@ -55,7 +53,7 @@ viewMain : String -> Html Msg -> Html Msg
 viewMain id_ viewContainer =
     div [ class "main-container" ]
         [ viewSideBar
-        , div [ id id_ ] [ viewContainer ]
+        , main_ [ id id_ ] [ viewContainer ]
         ]
 
 
