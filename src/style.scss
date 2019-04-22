@@ -27,8 +27,9 @@ body {
 #navigation {
   padding: 10px;
   position: relative;
-  background: #fff;
+  background: #eeeeee;
   @include pc {
+    background: #fff;
     width: 450px;
   }
   border-right: 1px solid #c4c4c4;
