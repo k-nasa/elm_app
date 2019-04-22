@@ -15,29 +15,27 @@ view : Model -> Browser.Document Msg
 view model =
     { title = "ankipan"
     , body =
-        [ main_ []
-            [ viewLoading model
-                (case model.page of
-                    LoginPage loginModel ->
-                        Page.Login.view loginModel
-                            |> Html.map LoginMsg
+        [ viewLoading model
+            (case model.page of
+                LoginPage loginModel ->
+                    Page.Login.view loginModel
+                        |> Html.map LoginMsg
 
-                    TopPage topModel ->
-                        viewMain "top-page"
-                            (Page.Top.view topModel
-                                |> Html.map TopMsg
-                            )
+                TopPage topModel ->
+                    viewMain "top-page"
+                        (Page.Top.view topModel
+                            |> Html.map TopMsg
+                        )
 
-                    AddCardPage pageModel ->
-                        viewMain "add-card-page"
-                            (Page.AddCard.view pageModel
-                                |> Html.map AddCardMsg
-                            )
+                AddCardPage pageModel ->
+                    viewMain "add-card-page"
+                        (Page.AddCard.view pageModel
+                            |> Html.map AddCardMsg
+                        )
 
-                    _ ->
-                        text "unimplement"
-                )
-            ]
+                _ ->
+                    text "unimplement"
+            )
         ]
     }
 
@@ -55,53 +53,58 @@ viewMain : String -> Html Msg -> Html Msg
 viewMain id_ viewContainer =
     div [ class "main-container" ]
         [ viewSideBar
-        , div [ id id_ ] [ viewContainer ]
+        , main_ [ id id_ ] [ viewContainer ]
         ]
 
 
 viewSideBar : Html Msg
 viewSideBar =
-    div [ id "sidebar" ]
-        [ div [ class "sidebar-menue" ]
-            [ ul []
-                [ li [ class "unborder" ] [ a [ href "/" ] [ img [ src "%PUBLIC_URL%/assets/images/icon.jpeg", width 100, height 100 ] [] ] ]
-                , li []
-                    [ a [ href "#" ]
-                        [ i [ class "fas fa-edit" ] []
-                        , text "カードを編集"
+    div [ id "navigation" ]
+        [ div [ class "navigation-menue" ]
+            [ input [ id "nav-checkbox", class "nav-unshown", type_ "checkbox" ] []
+            , label [ id "nav-open-btn", for "nav-checkbox" ] [ span [] [] ]
+            , label [ id "nav-close", for "nav-checkbox", class "nav-unshown" ] []
+            , div [ id "nav-content" ]
+                [ ul []
+                    [ li [ class "unborder" ] [ a [ href "/" ] [ img [ src "%PUBLIC_URL%/assets/images/icon.jpeg", width 100, height 100 ] [] ] ]
+                    , li []
+                        [ a [ href "#" ]
+                            [ i [ class "fas fa-edit" ] []
+                            , text "カードを編集"
+                            ]
+                        ]
+                    , li []
+                        [ a [ href "#" ]
+                            [ i [ class "fas fa-clipboard" ] []
+                            , text "学習記録"
+                            ]
+                        ]
+                    , li []
+                        [ a [ href "#" ]
+                            [ i [ class "fas fa-cog" ] []
+                            , text "設定"
+                            ]
+                        ]
+                    , li []
+                        [ a [ href "#" ]
+                            [ i [ class "fas fa-question" ] []
+                            , text "ヘルプ"
+                            ]
+                        ]
+                    , li []
+                        [ a [ href "#", onClick ClearLocalStorageUid ]
+                            [ i [ class "fas fa-sign-out-alt" ] []
+                            , text "ログアウト"
+                            ]
+                        ]
+                    , li [ class "unborder" ]
+                        [ a [ href "#" ]
+                            [ i [ class "fas fa-phone" ] []
+                            , text "要望"
+                            ]
                         ]
                     ]
-                , li []
-                    [ a [ href "#" ]
-                        [ i [ class "fas fa-clipboard" ] []
-                        , text "学習記録"
-                        ]
-                    ]
-                , li []
-                    [ a [ href "#" ]
-                        [ i [ class "fas fa-cog" ] []
-                        , text "設定"
-                        ]
-                    ]
-                , li []
-                    [ a [ href "#" ]
-                        [ i [ class "fas fa-question" ] []
-                        , text "ヘルプ"
-                        ]
-                    ]
-                , li []
-                    [ a [ href "#", onClick ClearLocalStorageUid ]
-                        [ i [ class "fas fa-sign-out-alt" ] []
-                        , text "ログアウト"
-                        ]
-                    ]
-                , li [ class "unborder" ]
-                    [ a [ href "#" ]
-                        [ i [ class "fas fa-phone" ] []
-                        , text "要望"
-                        ]
-                    ]
+                , a [ href "https://twitter.com/intent/tweet?text=%E3%82%A2%E3%83%B3%E3%82%AD%E3%83%91%E3%83%B3%E3%81%A0%E3%81%8A", target "_bulk" ] [ text "ツイート" ]
                 ]
-            , a [ href "https://twitter.com/intent/tweet?text=%E3%82%A2%E3%83%B3%E3%82%AD%E3%83%91%E3%83%B3%E3%81%A0%E3%81%8A", target "_bulk" ] [ text "ツイート" ]
             ]
         ]

@@ -5,7 +5,15 @@
 
   .lerge-start-button {
     display: inline-block;
-    font-size: 36px;
+
+    @include pc {
+      font-size: 36px;
+    }
+
+    @include sp {
+      font-size: 24px;
+    }
+
     text-decoration: none;
     background: #58d9fd;
     border-radius: 60px;
@@ -48,11 +56,12 @@
   }
 
   .top-page-container {
-    margin: 40px 20px 20px 20px;
+    @include pc {
+      margin: 40px 20px 20px 20px;
+    }
     background: white;
     border-radius: 60px;
     text-align: center;
-    height: 70%;
 
     .sub-caption {
       color: #999999;
@@ -61,19 +70,34 @@
     .card-description {
       display: flex;
       justify-content: space-around;
+
+      @include sp {
+        padding-bottom: 20px;
+      }
       .new-card-container {
-        width: 200px;
-        height: 200px;
+        @include pc {
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+        }
+        @include sp {
+          width: 50%;
+          border-radius: 60px;
+        }
         background: #a7c9fd;
-        border-radius: 50%;
       }
 
       .review-card-container {
-        margin: 10px;
-        width: 200px;
-        height: 200px;
+        @include pc {
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+        }
+        @include sp {
+          width: 50%;
+          border-radius: 60px;
+        }
         background: #fdbca7;
-        border-radius: 50%;
       }
 
       .caption {
@@ -82,7 +106,12 @@
       }
       .number {
         padding-top: 0;
-        font-size: 36px;
+        @include pc {
+          font-size: 36px;
+        }
+        @include sp {
+          font-size: 24px;
+        }
       }
     }
   }
