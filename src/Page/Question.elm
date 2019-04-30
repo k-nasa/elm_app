@@ -89,7 +89,7 @@ view model =
                         )
                     ]
                 ]
-            , a [ class "lerge-start-button", href "/question" ]
+            , a [ class "lerge-start-button", href "#" ]
                 [ i [ class "fas fa-laptop-code" ] []
                 , text "答えを確認"
                 ]
