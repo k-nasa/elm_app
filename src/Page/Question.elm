@@ -59,7 +59,7 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         NoOp ->
-            ( {}, Cmd.none )
+            ( model, Cmd.none )
 
 
 view : Model -> Html Msg
