@@ -64,4 +64,30 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [] []
+    div []
+        [ div [ class "form-header" ]
+            [ a [ href "/", class "close-button" ]
+                [ i [ class "fas fa-times" ] []
+                ]
+            , div [ class "question-card-container" ]
+                [ div [ class "question-card-header" ]
+                    [ span [ class "question-percentage" ]
+                        [ text (String.fromInt model.solved_count ++ "/" ++ String.fromInt model.question_count)
+                        ]
+                    , span [ class "card-title" ]
+                        [ text "問題文"
+                        ]
+                    ]
+                , div [ class "question-card-content" ]
+                    [ text
+                        (case List.head model.remaining_cards of
+                            Just card ->
+                                card.problem_statement
+
+                            Nothing ->
+                                ""
+                        )
+                    ]
+                ]
+            ]
+        ]
