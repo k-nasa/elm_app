@@ -5,13 +5,29 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
 
+
+-- TODO apiサーバーからcardsを取ってくる必要あり
+-- ダミーで仮置き
+
+
 init : Model
 init =
-    {}
+    { question_count = 6
+    , solved_count = 0
+    , remaining_cards =
+        [ dummyCard
+        , dummyCard
+        , dummyCard
+        , dummyCard
+        ]
+    }
 
 
 type alias Model =
-    {}
+    { question_count : Int
+    , solved_count : Int
+    , remaining_cards : List Card
+    }
 
 
 type Msg
