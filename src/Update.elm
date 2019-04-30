@@ -5,6 +5,7 @@ import Browser.Navigation as Nav
 import Model exposing (Model, Page(..))
 import Page.AddCard
 import Page.Login
+import Page.Question
 import Page.Top
 import Port exposing (clearLocalStorageUid)
 import Route exposing (Route)
@@ -18,6 +19,7 @@ type Msg
     | LoginMsg Page.Login.Msg
     | TopMsg Page.Top.Msg
     | AddCardMsg Page.AddCard.Msg
+    | QuestionMsg Page.Question.Msg
     | ReceivedLoggedIn ()
     | Loading Bool
     | ClearLocalStorageUid
@@ -79,6 +81,20 @@ update msg model =
                 _ ->
                     ( model, Cmd.none )
 
+        QuestionMsg pageMsg ->
+            case model.page of
+                QuestionPage pageModel ->
+                    let
+                        ( newModel, cmd ) =
+                            Page.Question.update pageMsg pageModel
+                    in
+                    ( { model | page = QuestionPage newModel }
+                    , Cmd.map QuestionMsg cmd
+                    )
+
+                _ ->
+                    ( model, Cmd.none )
+
         ReceivedLoggedIn _ ->
             redirectTopPage model
 
@@ -109,6 +125,9 @@ goTo maybeRoute model =
 
         Just Route.Login ->
             ( { model | page = LoginPage Page.Login.init }, Cmd.none )
+
+        Just Route.Question ->
+            ( { model | page = QuestionPage Page.Question.init }, Cmd.none )
 
 
 redirectSignUpPage : Model -> ( Model, Cmd Msg )

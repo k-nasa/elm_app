@@ -7,6 +7,7 @@ import Html.Events exposing (..)
 import Model exposing (Model, Page(..))
 import Page.AddCard
 import Page.Login
+import Page.Question
 import Page.Top
 import Update exposing (Msg(..))
 
@@ -33,7 +34,16 @@ view model =
                             |> Html.map AddCardMsg
                         )
 
-                _ ->
+                QuestionPage pageModel ->
+                    viewMain "question-page"
+                        (Page.Question.view pageModel
+                            |> Html.map QuestionMsg
+                        )
+
+                NotFound ->
+                    text "notfound"
+
+                AboutPage ->
                     text "unimplement"
             )
         ]
