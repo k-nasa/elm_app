@@ -44,6 +44,17 @@ type alias Card =
     }
 
 
+dummyCard : Card
+dummyCard =
+    { id = 1
+    , user_id = 1
+    , problem_statement = "問題文"
+    , answer_text = "回答文だお"
+    , memo = "メモ"
+    , question_time = "分からん"
+    }
+
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
