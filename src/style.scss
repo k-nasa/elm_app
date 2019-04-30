@@ -25,6 +25,7 @@ body {
 }
 
 #navigation {
+  position: fixed;
   padding: 10px;
   position: relative;
   background: #eeeeee;
@@ -81,6 +82,8 @@ body {
     width: 15px;
     height: 22px;
     vertical-align: middle;
+    position: fixed;
+    margin-buttom: 22px;
   }
 
   #nav-open-btn span,
