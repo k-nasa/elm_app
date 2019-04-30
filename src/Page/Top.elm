@@ -36,7 +36,7 @@ viewContainer : Html Msg
 viewContainer =
     div []
         [ div [ class "top-page-container" ]
-            [ a [ class "lerge-start-button", href "#" ]
+            [ a [ class "lerge-start-button", href "/question" ]
                 [ i [ class "fas fa-laptop-code" ] []
                 , text "学習を始める"
                 ]
