@@ -60,7 +60,6 @@
       margin: 40px 20px 20px 20px;
     }
     background: white;
-    border-radius: 60px;
     text-align: center;
 
     .sub-caption {
@@ -71,7 +70,7 @@
       display: flex;
       justify-content: space-around;
 
-      @include sp {
+      @include pc {
         padding-bottom: 20px;
       }
       .new-card-container {
@@ -82,7 +81,7 @@
         }
         @include sp {
           width: 50%;
-          border-radius: 60px;
+          // border-radius: 60px;
         }
         background: #a7c9fd;
       }
@@ -95,7 +94,7 @@
         }
         @include sp {
           width: 50%;
-          border-radius: 60px;
+          // border-radius: 60px;
         }
         background: #fdbca7;
       }
