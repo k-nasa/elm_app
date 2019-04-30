@@ -69,26 +69,26 @@ viewSideBar =
                     [ li [ class "unborder" ] [ a [ href "/" ] [ img [ src "%PUBLIC_URL%/assets/images/icon.jpeg", width 100, height 100 ] [] ] ]
                     , li []
                         [ a [ href "#" ]
-                            [ i [ class "fas fa-edit" ] []
-                            , text "カードを編集"
+                            [ s []
+                                [ i [ class "fas fa-edit" ] []
+                                , text "カードを編集"
+                                ]
                             ]
                         ]
                     , li []
                         [ a [ href "#" ]
-                            [ i [ class "fas fa-clipboard" ] []
-                            , text "学習記録"
+                            [ s []
+                                [ i [ class "fas fa-clipboard" ] []
+                                , text "学習記録"
+                                ]
                             ]
                         ]
                     , li []
                         [ a [ href "#" ]
-                            [ i [ class "fas fa-cog" ] []
-                            , text "設定"
-                            ]
-                        ]
-                    , li []
-                        [ a [ href "#" ]
-                            [ i [ class "fas fa-question" ] []
-                            , text "ヘルプ"
+                            [ s []
+                                [ i [ class "fas fa-cog" ] []
+                                , text "設定"
+                                ]
                             ]
                         ]
                     , li []
@@ -98,7 +98,7 @@ viewSideBar =
                             ]
                         ]
                     , li [ class "unborder" ]
-                        [ a [ href "#" ]
+                        [ a [ href "https://twitter.com/nasa_desu" ]
                             [ i [ class "fas fa-phone" ] []
                             , text "要望"
                             ]
