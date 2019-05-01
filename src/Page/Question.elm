@@ -48,7 +48,7 @@ dummyCard : Card
 dummyCard =
     { id = 1
     , user_id = 1
-    , problem_statement = "問題文"
+    , problem_statement = "問題文。長いお~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     , answer_text = "回答文だお"
     , memo = "メモ"
     , question_time = "分からん"
