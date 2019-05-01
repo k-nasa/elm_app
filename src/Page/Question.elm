@@ -14,6 +14,7 @@ init : Model
 init =
     { question_count = 6
     , solved_count = 0
+    , does_show_answer = False
     , remaining_cards =
         [ dummyCard
         , dummyCard
@@ -27,11 +28,13 @@ type alias Model =
     { question_count : Int
     , solved_count : Int
     , remaining_cards : List Card
+    , does_show_answer : Bool
     }
 
 
 type Msg
     = NoOp
+    | ShowAnswer
 
 
 type alias Card =
@@ -60,6 +63,9 @@ update msg model =
     case msg of
         NoOp ->
             ( model, Cmd.none )
+
+        ShowAnswer ->
+            ( { model | does_show_answer = True }, Cmd.none )
 
 
 view : Model -> Html Msg
@@ -92,9 +98,18 @@ view model =
                         ]
                     ]
                 ]
-            , a [ class "lerge-start-button", href "#" ]
-                [ i [ class "fas fa-laptop-code" ] []
-                , text "答えを確認"
+            , if model.does_show_answer then
+                text "show!!"
+
+              else
+                p [ class "lerge-plus-button", href "#", onClick ShowAnswer ]
+                    [ i [ class "fas fa-laptop-code" ] []
+                    , text "答えを確認"
+                    ]
+            ]
+        ]
+
+
 questionNavBar : Html Msg
 questionNavBar =
     div [ class "question-nav-bar bg-light" ]
