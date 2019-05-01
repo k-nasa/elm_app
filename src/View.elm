@@ -35,10 +35,8 @@ view model =
                         )
 
                 QuestionPage pageModel ->
-                    viewMain "question-page"
-                        (Page.Question.view pageModel
-                            |> Html.map QuestionMsg
-                        )
+                    Page.Question.view pageModel
+                        |> Html.map QuestionMsg
 
                 NotFound ->
                     text "notfound"
