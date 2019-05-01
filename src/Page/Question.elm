@@ -64,29 +64,32 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ div [ class "form-header" ]
-            [ a [ href "/", class "close-button" ]
-                [ i [ class "fas fa-times" ] []
-                ]
-            , div [ class "question-card-container" ]
-                [ div [ class "question-card-header" ]
-                    [ span [ class "question-percentage" ]
-                        [ text (String.fromInt model.solved_count ++ "/" ++ String.fromInt model.question_count)
-                        ]
-                    , span [ class "card-title" ]
-                        [ text "問題文"
+    div [ id "question-page" ]
+        [ questionNavBar
+        , div [ class "form-header" ]
+            [ div [ class "question-card-container" ]
+                [ p [ class "question-card-header" ]
+                    [ span [ class "card-title" ]
+                        [ text "問題" ]
+                    , span [ class "question-percentage" ]
+                        [ text
+                            (String.fromInt (model.solved_count + 1)
+                                ++ "/"
+                                ++ String.fromInt model.question_count
+                            )
                         ]
                     ]
                 , div [ class "question-card-content" ]
-                    [ text
-                        (case List.head model.remaining_cards of
-                            Just card ->
-                                card.problem_statement
+                    [ p [ class "question-text" ]
+                        [ text
+                            (case List.head model.remaining_cards of
+                                Just card ->
+                                    card.problem_statement
 
-                            Nothing ->
-                                ""
-                        )
+                                Nothing ->
+                                    ""
+                            )
+                        ]
                     ]
                 ]
             , a [ class "lerge-start-button", href "#" ]
