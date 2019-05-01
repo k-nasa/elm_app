@@ -1,17 +1,43 @@
 #question-page {
-  @include sp {
-    padding-top: 22px;
-  }
   width: 100%;
   height: 100vh;
   background: #eeeeee;
 
   .question-card-container {
-    @include pc {
-      margin: 40px 20px 20px 20px;
-    }
+    margin: 40px 20px 20px 20px;
     background: white;
     text-align: center;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .back-button {
+    color: #247bfd;
+  }
+  .question-nav-bar-header {
+    text-align: center;
+  }
+  .question-card-header {
+    background: #58d9fd;
+    color: white;
+    font-size: 18px;
+  }
+  .question-percentage {
+    text-align: center;
+  }
+
+  .card-title {
+    text-align: center;
+  }
+
+  .question-card-content {
+    height: 30vh;
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .question-text {
+    word-break: break-all;
   }
 }
