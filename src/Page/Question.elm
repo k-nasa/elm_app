@@ -95,6 +95,12 @@ view model =
             , a [ class "lerge-start-button", href "#" ]
                 [ i [ class "fas fa-laptop-code" ] []
                 , text "答えを確認"
+questionNavBar : Html Msg
+questionNavBar =
+    div [ class "question-nav-bar bg-light" ]
+        [ nav [ class "navbar navbar-expand-lg navbar-light" ]
+            [ a [ class "navbar-brand back-button", href "/" ]
+                [ i [ class "fas fa-arrow-left" ] []
                 ]
             ]
         ]
