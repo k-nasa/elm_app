@@ -109,8 +109,9 @@ hasError s =
 
 view : Model -> Html Msg
 view model =
-    div [ id "add-card-page" ]
-        [ form [ class "card-form", onSubmit Submit ]
+    div []
+        [ navBar
+        , form [ class "card-form", onSubmit Submit ]
             [ div [ class "form-header" ]
                 [ button [ class "lerge-plus-button" ]
                     [ i [ class "fas fa-plus" ] []
@@ -140,6 +141,17 @@ view model =
                         [ input [ class "form-control", type_ "text", placeholder "メモ", onInput InputMemo, value model.memo ] []
                         ]
                     ]
+                ]
+            ]
+        ]
+
+
+navBar : Html Msg
+navBar =
+    div [ class "question-nav-bar bg-light" ]
+        [ nav [ class "navbar navbar-expand-lg navbar-light" ]
+            [ a [ class "navbar-brand back-button", href "/" ]
+                [ i [ class "fas fa-arrow-left" ] []
                 ]
             ]
         ]

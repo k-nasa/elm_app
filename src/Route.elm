@@ -9,6 +9,7 @@ type Route
     | About
     | Login
     | AddCard
+    | Question
 
 
 parse : Url -> Maybe Route
@@ -24,4 +25,5 @@ parser =
         , map Login (s "login")
         , map Login (s "sign_up")
         , map AddCard (s "add_card")
+        , map Question (s "question")
         ]

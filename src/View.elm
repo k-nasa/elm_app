@@ -7,6 +7,7 @@ import Html.Events exposing (..)
 import Model exposing (Model, Page(..))
 import Page.AddCard
 import Page.Login
+import Page.Question
 import Page.Top
 import Update exposing (Msg(..))
 
@@ -28,12 +29,23 @@ view model =
                         )
 
                 AddCardPage pageModel ->
-                    viewMain "add-card-page"
+                    customNavBar "add-card-page"
+                        "invisible-sp"
                         (Page.AddCard.view pageModel
                             |> Html.map AddCardMsg
                         )
 
-                _ ->
+                QuestionPage pageModel ->
+                    customNavBar "question-page"
+                        "invisible-sp"
+                        (Page.Question.view pageModel
+                            |> Html.map QuestionMsg
+                        )
+
+                NotFound ->
+                    text "notfound"
+
+                AboutPage ->
                     text "unimplement"
             )
         ]
@@ -52,14 +64,22 @@ viewLoading model content =
 viewMain : String -> Html Msg -> Html Msg
 viewMain id_ viewContainer =
     div [ class "main-container" ]
-        [ viewSideBar
+        [ viewSideBar ""
         , main_ [ id id_ ] [ viewContainer ]
         ]
 
 
-viewSideBar : Html Msg
-viewSideBar =
-    div [ id "navigation" ]
+customNavBar : String -> String -> Html Msg -> Html Msg
+customNavBar id_ class_ viewContainer =
+    div [ class "main-container" ]
+        [ viewSideBar class_
+        , main_ [ id id_ ] [ viewContainer ]
+        ]
+
+
+viewSideBar : String -> Html Msg
+viewSideBar class_ =
+    div [ id "navigation", class class_ ]
         [ div [ class "navigation-menue" ]
             [ input [ id "nav-checkbox", class "nav-unshown", type_ "checkbox" ] []
             , label [ id "nav-open-btn", for "nav-checkbox" ] [ span [] [] ]
@@ -69,26 +89,26 @@ viewSideBar =
                     [ li [ class "unborder" ] [ a [ href "/" ] [ img [ src "%PUBLIC_URL%/assets/images/icon.jpeg", width 100, height 100 ] [] ] ]
                     , li []
                         [ a [ href "#" ]
-                            [ i [ class "fas fa-edit" ] []
-                            , text "カードを編集"
+                            [ s []
+                                [ i [ class "fas fa-edit" ] []
+                                , text "カードを編集"
+                                ]
                             ]
                         ]
                     , li []
                         [ a [ href "#" ]
-                            [ i [ class "fas fa-clipboard" ] []
-                            , text "学習記録"
+                            [ s []
+                                [ i [ class "fas fa-clipboard" ] []
+                                , text "学習記録"
+                                ]
                             ]
                         ]
                     , li []
                         [ a [ href "#" ]
-                            [ i [ class "fas fa-cog" ] []
-                            , text "設定"
-                            ]
-                        ]
-                    , li []
-                        [ a [ href "#" ]
-                            [ i [ class "fas fa-question" ] []
-                            , text "ヘルプ"
+                            [ s []
+                                [ i [ class "fas fa-cog" ] []
+                                , text "設定"
+                                ]
                             ]
                         ]
                     , li []
@@ -98,7 +118,7 @@ viewSideBar =
                             ]
                         ]
                     , li [ class "unborder" ]
-                        [ a [ href "#" ]
+                        [ a [ href "https://twitter.com/nasa_desu" ]
                             [ i [ class "fas fa-phone" ] []
                             , text "要望"
                             ]
