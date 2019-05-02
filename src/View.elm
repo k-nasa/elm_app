@@ -35,8 +35,11 @@ view model =
                         )
 
                 QuestionPage pageModel ->
-                    Page.Question.view pageModel
-                        |> Html.map QuestionMsg
+                    customNavBar "question-page"
+                        "invisible-sp"
+                        (Page.Question.view pageModel
+                            |> Html.map QuestionMsg
+                        )
 
                 NotFound ->
                     text "notfound"
@@ -60,14 +63,22 @@ viewLoading model content =
 viewMain : String -> Html Msg -> Html Msg
 viewMain id_ viewContainer =
     div [ class "main-container" ]
-        [ viewSideBar
+        [ viewSideBar ""
         , main_ [ id id_ ] [ viewContainer ]
         ]
 
 
-viewSideBar : Html Msg
-viewSideBar =
-    div [ id "navigation" ]
+customNavBar : String -> String -> Html Msg -> Html Msg
+customNavBar id_ class_ viewContainer =
+    div [ class "main-container" ]
+        [ viewSideBar class_
+        , main_ [ id id_ ] [ viewContainer ]
+        ]
+
+
+viewSideBar : String -> Html Msg
+viewSideBar class_ =
+    div [ id "navigation", class class_ ]
         [ div [ class "navigation-menue" ]
             [ input [ id "nav-checkbox", class "nav-unshown", type_ "checkbox" ] []
             , label [ id "nav-open-btn", for "nav-checkbox" ] [ span [] [] ]

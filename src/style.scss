@@ -193,6 +193,12 @@ body {
   }
 }
 
+@include sp {
+  .invisible-sp {
+    display: none;
+  }
+}
+
 @import 'styles/top_page';
 @import 'styles/add_card_page';
 @import 'styles/question_page';
