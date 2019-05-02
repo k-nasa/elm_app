@@ -88,18 +88,34 @@ view model =
                 , div [ class "question-card-content" ]
                     [ p [ class "question-text" ]
                         [ text
-                            (case List.head model.remaining_cards of
-                                Just card ->
-                                    card.problem_statement
+                            (if model.does_show_answer then
+                                case List.head model.remaining_cards of
+                                    Just card ->
+                                        card.answer_text
 
-                                Nothing ->
-                                    ""
+                                    Nothing ->
+                                        ""
+
+                             else
+                                case List.head model.remaining_cards of
+                                    Just card ->
+                                        card.problem_statement
+
+                                    Nothing ->
+                                        ""
                             )
                         ]
                     ]
                 ]
             , if model.does_show_answer then
-                text "show!!"
+                div []
+                    [ div [ class "feed-buttons" ]
+                        [ button [ class "btn btn-primary" ] [ text "ほげ" ]
+                        , button [ class "btn btn-primary" ] [ text "ほげ" ]
+                        , button [ class "btn btn-primary" ] [ text "ほげ" ]
+                        , button [ class "btn btn-primary" ] [ text "ほげ" ]
+                        ]
+                    ]
 
               else
                 p [ class "lerge-plus-button", href "#", onClick ShowAnswer ]
