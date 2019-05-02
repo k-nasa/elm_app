@@ -29,7 +29,8 @@ view model =
                         )
 
                 AddCardPage pageModel ->
-                    viewMain "add-card-page"
+                    customNavBar "add-card-page"
+                        "invisible-sp"
                         (Page.AddCard.view pageModel
                             |> Html.map AddCardMsg
                         )

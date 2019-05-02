@@ -70,7 +70,7 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [ id "question-page" ]
+    div []
         [ questionNavBar
         , div [ class "form-header" ]
             [ div [ class "question-card-container" ]
