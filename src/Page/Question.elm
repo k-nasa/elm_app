@@ -12,7 +12,7 @@ import Html.Events exposing (..)
 
 init : Model
 init =
-    { question_count = 6
+    { question_count = 4
     , solved_count = 0
     , does_show_answer = False
     , remaining_cards =
@@ -35,6 +35,7 @@ type alias Model =
 type Msg
     = NoOp
     | ShowAnswer
+    | SendFeed Feed
 
 
 type alias Card =
@@ -45,6 +46,13 @@ type alias Card =
     , memo : String
     , question_time : String
     }
+
+
+type Feed
+    = Unsolve
+    | Difficult
+    | Solve
+    | Easy
 
 
 dummyCard : Card
@@ -66,6 +74,16 @@ update msg model =
 
         ShowAnswer ->
             ( { model | does_show_answer = True }, Cmd.none )
+
+        -- TODO feed をapiに投げる
+        SendFeed feed ->
+            case List.isEmpty (List.drop 1 model.remaining_cards) of
+                False ->
+                    ( { model | does_show_answer = False, solved_count = model.solved_count + 1, remaining_cards = List.drop 1 model.remaining_cards }, Cmd.none )
+
+                -- TODO 元のページにリダイレクト
+                True ->
+                    ( { model | does_show_answer = False, solved_count = model.solved_count + 999999 }, Cmd.none )
 
 
 view : Model -> Html Msg
@@ -110,10 +128,10 @@ view model =
             , if model.does_show_answer then
                 div []
                     [ div [ class "feed-buttons" ]
-                        [ button [ class "btn btn-primary" ] [ text "ほげ" ]
-                        , button [ class "btn btn-primary" ] [ text "ほげ" ]
-                        , button [ class "btn btn-primary" ] [ text "ほげ" ]
-                        , button [ class "btn btn-primary" ] [ text "ほげ" ]
+                        [ button [ class "btn btn-danger", onClick (SendFeed Unsolve) ] [ text "解けなかった" ]
+                        , button [ class "btn btn-warning", onClick (SendFeed Difficult) ] [ text "難しい" ]
+                        , button [ class "btn btn-success", onClick (SendFeed Solve) ] [ text "解けた" ]
+                        , button [ class "btn btn-primary", onClick (SendFeed Easy) ] [ text "簡単" ]
                         ]
                     ]
 
