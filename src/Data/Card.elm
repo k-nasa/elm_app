@@ -16,3 +16,20 @@ type alias Card =
 
 type alias Cards =
     List Card
+
+
+cardDecoder : Decoder Card
+cardDecoder =
+    D.map7 Card
+        (field "id" int)
+        (field "user_id" string)
+        (field "solve_count" int)
+        (field "problem_statement" string)
+        (field "answer_text" string)
+        (field "memo" string)
+        (field "question_time" string)
+
+
+cardsDecoder : Decoder Cards
+cardsDecoder =
+    list cardDecoder
