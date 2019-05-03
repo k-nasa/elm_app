@@ -1,39 +1,89 @@
 module Page.Top exposing (Model, Msg(..), init, update, view)
 
+import Components.Loading exposing (loadingView)
+import Data.Card exposing (Card, cardCountTuple, cardsDecoder, dummyCard)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Http
 
 
-init : Model
+init : ( Model, Cmd Msg )
 init =
-    {}
+    ( { loading = Loading
+      , cards = [ dummyCard, dummyCard ]
+      }
+    , fetchCards
+    )
 
 
 type alias Model =
-    {}
+    { loading : LoadStatus
+    , cards : List Card
+    }
+
+
+type LoadStatus
+    = Loading
+    | LoadedCards (List Card)
+    | Failed Http.Error
 
 
 type Msg
-    = NoOp
+    = Receive (Result Http.Error (List Card))
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        NoOp ->
-            ( model, Cmd.none )
+        Receive (Ok cards) ->
+            ( { model | loading = LoadedCards [], cards = cards }, Cmd.none )
+
+        Receive (Err e) ->
+            ( { model | loading = Failed e }, Cmd.none )
+
+
+fetchCards : Cmd Msg
+fetchCards =
+    Http.get
+        { url = "http://localhost:8080/graphiql"
+        , expect = Http.expectJson Receive cardsDecoder
+        }
 
 
 view : Model -> Html Msg
 view model =
-    div [ class "container" ]
-        [ div [ id "top-page" ] [ viewContainer ]
-        ]
+    viewLoading model
+        (div
+            [ class "container" ]
+            [ div [ id "top-page" ] [ viewContainer model ]
+            ]
+        )
 
 
-viewContainer : Html Msg
-viewContainer =
+viewLoading : Model -> Html msg -> Html msg
+viewLoading model content =
+    case model.loading of
+        Loading ->
+            loadingView
+
+        -- FIXME エラー画面を表示すべきだがAPI未実装なので仮置き
+        Failed e ->
+            div []
+                [ text "エラーだぴょん orz"
+                , content
+                ]
+
+        LoadedCards c ->
+            content
+
+
+viewContainer : Model -> Html Msg
+viewContainer model =
+    let
+        ( unsolve_count, solved_count ) =
+            cardCountTuple model.cards
+    in
     div []
         [ div [ class "top-page-container" ]
             [ a [ class "lerge-start-button", href "/question" ]
@@ -48,7 +98,7 @@ viewContainer =
                         , br [] []
                         , text "カード"
                         ]
-                    , p [ class "number" ] [ text "4" ]
+                    , p [ class "number" ] [ text (String.fromInt unsolve_count) ]
                     ]
                 , div [ class "review-card-container" ]
                     [ p [ class "caption" ]
@@ -56,7 +106,7 @@ viewContainer =
                         , br [] []
                         , text "カード"
                         ]
-                    , p [ class "number" ] [ text "4" ]
+                    , p [ class "number" ] [ text (String.fromInt solved_count) ]
                     ]
                 ]
             ]

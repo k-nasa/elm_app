@@ -115,7 +115,11 @@ goTo maybeRoute model =
             ( { model | page = NotFound }, Cmd.none )
 
         Just Route.Top ->
-            ( { model | page = TopPage Page.Top.init }, Cmd.none )
+            let
+                ( topPageModel, cmd ) =
+                    Page.Top.init
+            in
+            ( { model | page = TopPage topPageModel }, Cmd.map TopMsg cmd )
 
         Just Route.About ->
             ( { model | page = AboutPage }, Cmd.none )
