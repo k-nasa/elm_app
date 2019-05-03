@@ -1,6 +1,7 @@
 module View exposing (view, viewSideBar)
 
 import Browser
+import Components.Loading exposing (loadingView)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -59,19 +60,6 @@ viewLoading model content =
 
     else
         content
-
-
-loadingView : Html Msg
-loadingView =
-    div [ class "loading-view" ]
-        [ div [ class "spinner-grow text-info" ]
-            [ span [ class "sr-only" ] [ text "Loading" ]
-            ]
-        , p [ class "text-info" ] [ text "Now loading" ]
-        , div [ class "spinner-grow text-info" ]
-            [ span [ class "sr-only" ] [ text "Loading" ]
-            ]
-        ]
 
 
 viewMain : String -> Html Msg -> Html Msg
