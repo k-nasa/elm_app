@@ -33,3 +33,29 @@ cardDecoder =
 cardsDecoder : Decoder Cards
 cardsDecoder =
     list cardDecoder
+
+
+cardCountTuple : Cards -> ( Int, Int )
+cardCountTuple cards =
+    let
+        unsolveCount =
+            List.length (List.filter isUnsolve cards)
+    in
+    ( unsolveCount, List.length cards - unsolveCount )
+
+
+isUnsolve : Card -> Bool
+isUnsolve card =
+    card.solve_count == 0
+
+
+dummyCard : Card
+dummyCard =
+    { id = 1
+    , user_id = ""
+    , problem_statement = "問題文。長いお~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    , answer_text = "回答文だお"
+    , memo = "メモ"
+    , question_time = "分からん"
+    , solve_count = 9
+    }
