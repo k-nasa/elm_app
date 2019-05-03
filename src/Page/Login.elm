@@ -44,12 +44,14 @@ view model =
                     , text "Googleログイン"
                     ]
                 ]
-            , li []
-                [ button [ class "btn btn-outline-dark" ]
-                    [ img [ src "%PUBLIC_URL%/assets/images/twitter-logo.png", width 18, height 18 ] []
-                    , text "Twitterログイン"
-                    ]
-                ]
+
+            -- Token取得が面倒なのでコメントアウト
+            -- , li []
+            --     [ button [ class "btn btn-outline-dark" ]
+            --         [ img [ src "%PUBLIC_URL%/assets/images/twitter-logo.png", width 18, height 18 ] []
+            --         , text "Twitterログイン"
+            --         ]
+            --     ]
             , li []
                 [ button [ class "btn btn-outline-dark", onClick SignInWithGithub ]
                     [ img [ src "%PUBLIC_URL%/assets/images/github-logo.png", width 18, height 18 ] []
