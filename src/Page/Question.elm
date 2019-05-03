@@ -1,5 +1,6 @@
 module Page.Question exposing (Model, Msg(..), init, update, view)
 
+import Data.Card exposing (Card, dummyCard)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -38,32 +39,11 @@ type Msg
     | SendFeed Feed
 
 
-type alias Card =
-    { id : Int
-    , user_id : Int
-    , problem_statement : String
-    , answer_text : String
-    , memo : String
-    , question_time : String
-    }
-
-
 type Feed
     = Unsolve
     | Difficult
     | Solve
     | Easy
-
-
-dummyCard : Card
-dummyCard =
-    { id = 1
-    , user_id = 1
-    , problem_statement = "問題文。長いお~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    , answer_text = "回答文だお"
-    , memo = "メモ"
-    , question_time = "分からん"
-    }
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
