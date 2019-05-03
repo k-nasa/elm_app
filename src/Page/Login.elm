@@ -39,6 +39,7 @@ view model =
     div [ id "login-page" ]
         [ h1 [ class "title" ] [ text "アンキパンへようこそ" ]
         , p [] [ text "アンキパンは効率よく記憶するためのアプリです" ]
+        , p [] [ text "ごめんなさい。説明は特にないのでとりあえず使ってみてください ○ﾉ乙" ]
         , div [ class "social-buttons" ]
             [ li []
                 [ button [ class "btn btn-outline-dark", onClick SignInWithGoogle ]
