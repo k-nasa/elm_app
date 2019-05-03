@@ -202,6 +202,17 @@ body {
   color: #247bfd;
 }
 
+.loading-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  p {
+    margin-bottom: 4px;
+  }
+}
+
 @import 'styles/top_page';
 @import 'styles/add_card_page';
 @import 'styles/question_page';

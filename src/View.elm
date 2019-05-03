@@ -55,10 +55,23 @@ view model =
 viewLoading : Model -> Html Msg -> Html Msg
 viewLoading model content =
     if model.loading then
-        text "loading..."
+        loadingView
 
     else
         content
+
+
+loadingView : Html Msg
+loadingView =
+    div [ class "loading-view" ]
+        [ div [ class "spinner-grow text-info" ]
+            [ span [ class "sr-only" ] [ text "Loading" ]
+            ]
+        , p [ class "text-info" ] [ text "Now loading" ]
+        , div [ class "spinner-grow text-info" ]
+            [ span [ class "sr-only" ] [ text "Loading" ]
+            ]
+        ]
 
 
 viewMain : String -> Html Msg -> Html Msg
