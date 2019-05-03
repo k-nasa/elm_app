@@ -36,13 +36,23 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ ul []
-            [ li []
-                [ button [ class "fa fa-facebook" ] [ text "Facebookログイン" ]
-                , button [ class "fa fa-twitter" ] [ text "Twitterログイン" ]
-                , button [ onClick SignInWithGithub, class "fa fa-github" ] [ text "GitHubログイン" ]
-                , button [ onClick SignInWithGoogle, class "fa fa-github" ] [ text "Googleログイン" ]
+    div [ class "social-buttons" ]
+        [ li []
+            [ button [ class "btn btn-outline-dark", onClick SignInWithGoogle ]
+                [ img [ src "%PUBLIC_URL%/assets/images/google-logo.png", width 18, height 18 ] []
+                , text "Googleログイン"
+                ]
+            ]
+        , li []
+            [ button [ class "btn btn-outline-dark" ]
+                [ img [ src "%PUBLIC_URL%/assets/images/twitter-logo.png", width 18, height 18 ] []
+                , text "Twitterログイン"
+                ]
+            ]
+        , li []
+            [ button [ class "btn btn-outline-dark", onClick SignInWithGithub ]
+                [ img [ src "%PUBLIC_URL%/assets/images/github-logo.png", width 18, height 18 ] []
+                , text "GitHubログイン"
                 ]
             ]
         ]
