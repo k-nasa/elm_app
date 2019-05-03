@@ -37,7 +37,9 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div [ id "login-page" ]
-        [ div [ class "social-buttons" ]
+        [ h1 [ class "title" ] [ text "アンキパンへようこそ" ]
+        , p [] [ text "アンキパンは効率よく記憶するためのアプリです" ]
+        , div [ class "social-buttons" ]
             [ li []
                 [ button [ class "btn btn-outline-dark", onClick SignInWithGoogle ]
                     [ img [ src "%PUBLIC_URL%/assets/images/google-logo.png", width 18, height 18 ] []

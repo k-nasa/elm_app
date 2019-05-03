@@ -1,9 +1,19 @@
-.social-buttons {
-  padding: 30px;
-  margin: 0 auto;
+#login-page {
+  .title {
+    padding: 30px;
+  }
+
   text-align: center;
-  li {
-    list-style: none;
-    padding-bottom: 20px;
+  .social-buttons {
+    img {
+      margin: 0 10px;
+    }
+    padding: 30px;
+    margin: 0 auto;
+    text-align: center;
+    li {
+      list-style: none;
+      padding-bottom: 20px;
+    }
   }
 }
