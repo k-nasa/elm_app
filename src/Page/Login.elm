@@ -36,23 +36,25 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [ class "social-buttons" ]
-        [ li []
-            [ button [ class "btn btn-outline-dark", onClick SignInWithGoogle ]
-                [ img [ src "%PUBLIC_URL%/assets/images/google-logo.png", width 18, height 18 ] []
-                , text "Googleログイン"
+    div [ id "login-page" ]
+        [ div [ class "social-buttons" ]
+            [ li []
+                [ button [ class "btn btn-outline-dark", onClick SignInWithGoogle ]
+                    [ img [ src "%PUBLIC_URL%/assets/images/google-logo.png", width 18, height 18 ] []
+                    , text "Googleログイン"
+                    ]
                 ]
-            ]
-        , li []
-            [ button [ class "btn btn-outline-dark" ]
-                [ img [ src "%PUBLIC_URL%/assets/images/twitter-logo.png", width 18, height 18 ] []
-                , text "Twitterログイン"
+            , li []
+                [ button [ class "btn btn-outline-dark" ]
+                    [ img [ src "%PUBLIC_URL%/assets/images/twitter-logo.png", width 18, height 18 ] []
+                    , text "Twitterログイン"
+                    ]
                 ]
-            ]
-        , li []
-            [ button [ class "btn btn-outline-dark", onClick SignInWithGithub ]
-                [ img [ src "%PUBLIC_URL%/assets/images/github-logo.png", width 18, height 18 ] []
-                , text "GitHubログイン"
+            , li []
+                [ button [ class "btn btn-outline-dark", onClick SignInWithGithub ]
+                    [ img [ src "%PUBLIC_URL%/assets/images/github-logo.png", width 18, height 18 ] []
+                    , text "GitHubログイン"
+                    ]
                 ]
             ]
         ]
