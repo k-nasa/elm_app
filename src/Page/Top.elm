@@ -6,6 +6,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http
+import Port exposing (cacheCards)
 
 
 init : ( Model, Cmd Msg )
@@ -37,10 +38,11 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Receive (Ok cards) ->
-            ( { model | loading = LoadedCards [], cards = cards }, Cmd.none )
+            ( { model | loading = LoadedCards [], cards = cards }, cacheCards cards )
 
+        -- FIXME api未実装のためここでcacheCardsを呼び出す
         Receive (Err e) ->
-            ( { model | loading = Failed e }, Cmd.none )
+            ( { model | loading = Failed e }, cacheCards model.cards )
 
 
 fetchCards : Cmd Msg
