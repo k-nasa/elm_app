@@ -26,6 +26,10 @@ app.ports.signInWithGitHub.subscribe(function() {
   F.signInWithGithub();
 });
 
+app.ports.cacheCards.subscribe(function(cards) {
+  window.localStorage.setItem('cards', JSON.stringify(cards));
+});
+
 app.ports.clearLocalStorageUid.subscribe(function() {
   localStorage.removeItem(storageKey);
   location.reload();
