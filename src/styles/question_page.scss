@@ -41,4 +41,15 @@
   .question-text {
     word-break: break-all;
   }
+
+  .feed-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    .btn {
+      margin: 10px;
+      width: 40%;
+    }
+  }
 }
