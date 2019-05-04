@@ -30,7 +30,6 @@ init : Bool -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
     case flags of
         True ->
-            -- どうせgoToでmodel.pageは書き換わるのでNotFoundで仮置き
             Model NotFound key False
                 |> goTo (Route.parse url)
 
