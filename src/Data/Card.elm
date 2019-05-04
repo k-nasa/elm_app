@@ -1,4 +1,4 @@
-module Data.Card exposing (Card, cardCountTuple, cardDecoder, cardsDecoder, dummyCard)
+module Data.Card exposing (Card, Cards, cardCountTuple, cardDecoder, cardsDecoder, dummyCard)
 
 import Json.Decode as D exposing (..)
 
