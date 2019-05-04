@@ -7,7 +7,7 @@ import Html.Attributes exposing (..)
 import Model exposing (Model, Page(..))
 import Page.Login
 import Page.Top
-import Port exposing (loading, receivedLoggedIn)
+import Port exposing (loading, receiveCachedCards, receivedLoggedIn)
 import Route exposing (Route, parse)
 import Update exposing (Msg(..), goTo, redirectSignUpPage, redirectTopPage, update)
 import Url exposing (Url)
@@ -43,4 +43,5 @@ subscriptions model =
     Sub.batch
         [ receivedLoggedIn ReceivedLoggedIn
         , loading Loading
+        , receiveCachedCards ReceivedCachedCards
         ]

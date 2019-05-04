@@ -2,6 +2,7 @@ module Update exposing (Msg(..), goTo, redirectSignUpPage, redirectTopPage, upda
 
 import Browser
 import Browser.Navigation as Nav
+import Data.Card
 import Model exposing (Model, Page(..))
 import Page.AddCard
 import Page.Login
@@ -21,6 +22,7 @@ type Msg
     | AddCardMsg Page.AddCard.Msg
     | QuestionMsg Page.Question.Msg
     | ReceivedLoggedIn ()
+    | ReceivedCachedCards Data.Card.Cards
     | Loading Bool
     | ClearLocalStorageUid
 
@@ -98,6 +100,16 @@ update msg model =
         ReceivedLoggedIn _ ->
             redirectTopPage model
 
+        ReceivedCachedCards cards ->
+            case model.page of
+                QuestionPage pageModel ->
+                    ( { model | page = QuestionPage { pageModel | remaining_cards = cards } }
+                    , Cmd.none
+                    )
+
+                _ ->
+                    ( model, Cmd.none )
+
         ClearLocalStorageUid ->
             ( model, Port.clearLocalStorageUid () )
 
@@ -131,7 +143,11 @@ goTo maybeRoute model =
             ( { model | page = LoginPage Page.Login.init }, Cmd.none )
 
         Just Route.Question ->
-            ( { model | page = QuestionPage (Page.Question.init model.key) }, Cmd.none )
+            let
+                ( questionPageModel, cmd ) =
+                    Page.Question.init model.key
+            in
+            ( { model | page = QuestionPage questionPageModel }, Cmd.map QuestionMsg cmd )
 
 
 redirectSignUpPage : Model -> ( Model, Cmd Msg )

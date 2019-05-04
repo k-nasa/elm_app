@@ -5,6 +5,7 @@ import Data.Card exposing (Card, dummyCard)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Port
 
 
 
@@ -12,19 +13,21 @@ import Html.Events exposing (..)
 -- ダミーで仮置き
 
 
-init : Nav.Key -> Model
+init : Nav.Key -> ( Model, Cmd Msg )
 init key =
-    { question_count = 4
-    , solved_count = 0
-    , does_show_answer = False
-    , key = key
-    , remaining_cards =
-        [ dummyCard
-        , dummyCard
-        , dummyCard
-        , dummyCard
-        ]
-    }
+    ( { question_count = 4
+      , solved_count = 0
+      , does_show_answer = False
+      , key = key
+      , remaining_cards =
+            [ dummyCard
+            , dummyCard
+            , dummyCard
+            , dummyCard
+            ]
+      }
+    , Port.getCachedCards ()
+    )
 
 
 type alias Model =

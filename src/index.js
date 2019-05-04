@@ -38,6 +38,12 @@ app.ports.clearLocalStorageUid.subscribe(function() {
   location.reload();
 });
 
+app.ports.getCachedCards.subscribe(function() {
+  let cards = JSON.parse(localStorage.getItem(storageKeyCards));
+
+  app.ports.receiveCachedCards.send(cards);
+});
+
 async function fetchRedirectResult() {
   app.ports.loading.send(true);
   const result = await F.fetchFirebaseRedirectResult();
