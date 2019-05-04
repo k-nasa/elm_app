@@ -1,5 +1,6 @@
 module Page.Question exposing (Model, Msg(..), init, update, view)
 
+import Browser.Navigation as Nav
 import Data.Card exposing (Card, dummyCard)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -11,11 +12,12 @@ import Html.Events exposing (..)
 -- ダミーで仮置き
 
 
-init : Model
-init =
+init : Nav.Key -> Model
+init key =
     { question_count = 4
     , solved_count = 0
     , does_show_answer = False
+    , key = key
     , remaining_cards =
         [ dummyCard
         , dummyCard
@@ -30,6 +32,7 @@ type alias Model =
     , solved_count : Int
     , remaining_cards : List Card
     , does_show_answer : Bool
+    , key : Nav.Key
     }
 
 
@@ -61,9 +64,13 @@ update msg model =
                 False ->
                     ( { model | does_show_answer = False, solved_count = model.solved_count + 1, remaining_cards = List.drop 1 model.remaining_cards }, Cmd.none )
 
-                -- TODO 元のページにリダイレクト
                 True ->
-                    ( { model | does_show_answer = False, solved_count = model.solved_count + 999999 }, Cmd.none )
+                    redirectBack model
+
+
+redirectBack : Model -> ( Model, Cmd Msg )
+redirectBack model =
+    ( model, Nav.back model.key 1 )
 
 
 view : Model -> Html Msg

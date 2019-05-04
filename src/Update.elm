@@ -131,7 +131,7 @@ goTo maybeRoute model =
             ( { model | page = LoginPage Page.Login.init }, Cmd.none )
 
         Just Route.Question ->
-            ( { model | page = QuestionPage Page.Question.init }, Cmd.none )
+            ( { model | page = QuestionPage (Page.Question.init model.key) }, Cmd.none )
 
 
 redirectSignUpPage : Model -> ( Model, Cmd Msg )
