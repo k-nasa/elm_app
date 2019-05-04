@@ -4,10 +4,12 @@ import registerServiceWorker from './registerServiceWorker';
 import * as F from './firebase';
 
 registerServiceWorker();
-const storageKey = 'uid';
-const getUidByStorage = storageKey => localStorage.getItem(storageKey);
+const storageKeyUid = 'uid';
+const storageKeyCards = 'cards';
 
-var loggedIn = getUidByStorage(storageKey) !== null;
+const getUidByStorage = () => localStorage.getItem(storageKeyUid);
+
+var loggedIn = getUidByStorage() !== null;
 F.init();
 
 const app = Elm.Main.init({
@@ -27,11 +29,12 @@ app.ports.signInWithGitHub.subscribe(function() {
 });
 
 app.ports.cacheCards.subscribe(function(cards) {
-  window.localStorage.setItem('cards', JSON.stringify(cards));
+  localStorage.setItem(storageKeyCards, JSON.stringify(cards));
 });
 
 app.ports.clearLocalStorageUid.subscribe(function() {
-  localStorage.removeItem(storageKey);
+  localStorage.removeItem(storageKeyUid);
+
   location.reload();
 });
 
@@ -42,7 +45,7 @@ async function fetchRedirectResult() {
   if (result.credential) {
     var token = result.credential.accessToken;
     var uid = result.user.uid;
-    window.localStorage.setItem('uid', uid);
+    window.localStorage.setItem(storageKeyUid, uid);
     app.ports.receivedLoggedIn.send(null);
   }
 
