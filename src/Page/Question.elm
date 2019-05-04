@@ -15,16 +15,12 @@ import Port
 
 init : Nav.Key -> ( Model, Cmd Msg )
 init key =
-    ( { question_count = 4
+    ( { question_count = 0
       , solved_count = 0
       , does_show_answer = False
       , key = key
       , remaining_cards =
-            [ dummyCard
-            , dummyCard
-            , dummyCard
-            , dummyCard
-            ]
+            []
       }
     , Port.getCachedCards ()
     )
