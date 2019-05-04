@@ -113,13 +113,11 @@ view model =
                     ]
                 ]
             , if model.does_show_answer then
-                div []
-                    [ div [ class "feed-buttons" ]
-                        [ button [ class "btn btn-danger", onClick (SendFeed Unsolve) ] [ text "解けなかった" ]
-                        , button [ class "btn btn-warning", onClick (SendFeed Difficult) ] [ text "難しい" ]
-                        , button [ class "btn btn-success", onClick (SendFeed Solve) ] [ text "解けた" ]
-                        , button [ class "btn btn-primary", onClick (SendFeed Easy) ] [ text "簡単" ]
-                        ]
+                div [ class "feed-buttons" ]
+                    [ button [ class "btn btn-danger", onClick (SendFeed Unsolve) ] [ text "解けなかった" ]
+                    , button [ class "btn btn-warning", onClick (SendFeed Difficult) ] [ text "難しい" ]
+                    , button [ class "btn btn-success", onClick (SendFeed Solve) ] [ text "解けた" ]
+                    , button [ class "btn btn-primary", onClick (SendFeed Easy) ] [ text "簡単" ]
                     ]
 
               else
