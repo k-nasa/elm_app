@@ -62,7 +62,13 @@ update msg model =
         SendFeed feed ->
             case List.isEmpty (List.drop 1 model.remaining_cards) of
                 False ->
-                    ( { model | does_show_answer = False, solved_count = model.solved_count + 1, remaining_cards = List.drop 1 model.remaining_cards }, Cmd.none )
+                    ( { model
+                        | does_show_answer = False
+                        , solved_count = model.solved_count + 1
+                        , remaining_cards = List.drop 1 model.remaining_cards
+                      }
+                    , Cmd.none
+                    )
 
                 True ->
                     redirectBack model
