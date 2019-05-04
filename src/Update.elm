@@ -103,7 +103,14 @@ update msg model =
         ReceivedCachedCards cards ->
             case model.page of
                 QuestionPage pageModel ->
-                    ( { model | page = QuestionPage { pageModel | remaining_cards = cards } }
+                    ( { model
+                        | page =
+                            QuestionPage
+                                { pageModel
+                                    | remaining_cards = cards
+                                    , question_count = List.length cards
+                                }
+                      }
                     , Cmd.none
                     )
 
