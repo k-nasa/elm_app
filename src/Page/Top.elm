@@ -72,7 +72,7 @@ viewLoading model content =
         -- FIXME エラー画面を表示すべきだがAPI未実装なので仮置き
         Failed e ->
             div []
-                [ text "エラーだぴょん orz"
+                [ text "エラーが起きました。スミマセンorz"
                 , content
                 ]
 
