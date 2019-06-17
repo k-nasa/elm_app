@@ -1,6 +1,11 @@
-module Data.Card exposing (Card, Cards, cardCountTuple, cardDecoder, cardsDecoder, dummyCard)
+module Data.Card exposing (Card, Cards, LoadStatus(..), cardCountTuple, cardDecoder, cardsDecoder, dummyCard)
 
 import Json.Decode as D exposing (..)
+
+
+type LoadStatus
+    = Loading
+    | LoadedCards
 
 
 type alias Card =

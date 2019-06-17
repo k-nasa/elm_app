@@ -24,12 +24,6 @@ type alias Model =
     }
 
 
-type LoadStatus
-    = Loading
-    | LoadedCards (List Card)
-    | Failed Http.Error
-
-
 type Msg
     = Receive (Result Http.Error (List Card))
 
