@@ -39,15 +39,31 @@ app.ports.clearLocalStorageUid.subscribe(function() {
   location.reload();
 });
 
-// app.ports.getUid.subscribe(function() {
-//   let uid = localStorage.getItem(storageKeyUid);
-//   app.port.receiveUid.send(uid);
-// });
-
 app.ports.getCachedCards.subscribe(function() {
   let cards = JSON.parse(localStorage.getItem(storageKeyCards));
 
   app.ports.receiveCachedCards.send(cards);
+});
+
+app.ports.fetchCards.subscribe(function() {
+  let token = localStorage.getItem(storageKeyToken);
+
+  fetch('http://localhost:8080/cards?token=' + token, {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+  })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(json) {
+      localStorage.setItem(storageKeyCards, JSON.stringify(json));
+
+      let cards = JSON.parse(localStorage.getItem(storageKeyCards));
+      app.ports.receiveCachedCards.send(cards);
+    });
 });
 
 async function fetchRedirectResult() {
