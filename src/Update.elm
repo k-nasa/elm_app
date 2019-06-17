@@ -2,7 +2,7 @@ module Update exposing (Msg(..), goTo, redirectSignUpPage, redirectTopPage, upda
 
 import Browser
 import Browser.Navigation as Nav
-import Data.Card
+import Data.Card exposing (LoadStatus(..))
 import Model exposing (Model, Page(..))
 import Page.AddCard
 import Page.Login
@@ -102,6 +102,17 @@ update msg model =
 
         ReceivedCachedCards cards ->
             case model.page of
+                TopPage pageModel ->
+                    ( { model
+                        | page =
+                            TopPage
+                                { pageModel
+                                    | loading = LoadedCards
+                                }
+                      }
+                    , Cmd.none
+                    )
+
                 QuestionPage pageModel ->
                     ( { model
                         | page =
