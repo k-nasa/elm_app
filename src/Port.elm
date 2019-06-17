@@ -1,6 +1,7 @@
 port module Port exposing
     ( cacheCards
     , clearLocalStorageUid
+    , fetchCards
     , getCachedCards
     , loading
     , receiveCachedCards
@@ -34,3 +35,6 @@ port receiveCachedCards : (Cards -> msg) -> Sub msg
 
 
 port getCachedCards : () -> Cmd msg
+
+
+port fetchCards : () -> Cmd msg
