@@ -88,9 +88,9 @@ async function fetchRedirectResult() {
       body: JSON.stringify(user_params),
     });
 
-    let token = await response.json().token;
+    let token = await response.json();
 
-    window.localStorage.setItem(storageKeyToken, token);
+    window.localStorage.setItem(storageKeyToken, token['token']);
     app.ports.receivedLoggedIn.send(null);
   }
 
