@@ -42,7 +42,7 @@ type Msg
     | InputQuestion String
     | InputAnswer String
     | InputMemo String
-    | GotServerResponse (Result Http.Error ())
+    | GotServerResponse (Result Http.Error String)
 
 
 httpErrorToString : Http.Error -> String
@@ -103,7 +103,13 @@ update msg model =
                 ( { model | errors = newErrors }, Cmd.none )
 
             else
-                ( model, Cmd.none )
+                ( model
+                , Http.post
+                    { url = "http://localhost:8080/cards"
+                    , body = Http.emptyBody
+                    , expect = Http.expectString GotServerResponse
+                    }
+                )
 
 
 redirectBack : Model -> ( Model, Cmd Msg )
