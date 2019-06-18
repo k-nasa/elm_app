@@ -6,15 +6,25 @@ import Html.Events exposing (..)
 import Port
 
 
-init : Model
-init =
-    Model "" "" "" (Errors "" "")
+init : Nav.Key -> ( Model, Cmd Msg )
+init key =
+    ( { questionText = ""
+      , answerText = ""
+      , memo = ""
+      , serverError = ""
+      , errors = { questionText = "", answerText = "" }
+      , key = key
+      }
+    , Cmd.none
+    )
 
 
 type alias Model =
     { questionText : String
     , answerText : String
     , memo : String
+    , serverError : String
+    , key : Nav.Key
     , errors : Errors
     }
 
