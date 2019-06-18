@@ -155,7 +155,11 @@ goTo maybeRoute model =
             ( { model | page = AboutPage }, Cmd.none )
 
         Just Route.AddCard ->
-            ( { model | page = AddCardPage Page.AddCard.init }, Cmd.none )
+            let
+                ( addCardPageModel, cmd ) =
+                    Page.AddCard.init model.key
+            in
+            ( { model | page = AddCardPage addCardPageModel }, Cmd.map AddCardMsg cmd )
 
         Just Route.Login ->
             ( { model | page = LoginPage Page.Login.init }, Cmd.none )

@@ -1,8 +1,10 @@
 module Page.AddCard exposing (Model, Msg, init, update, view)
 
+import Browser.Navigation as Nav
 import Html exposing (..)
 import Html.Attributes exposing (class, cols, href, id, placeholder, rows, type_, value)
 import Html.Events exposing (..)
+import Http
 import Port
 
 
@@ -40,6 +42,9 @@ type Msg
     | InputQuestion String
     | InputAnswer String
     | InputMemo String
+    | GotServerResponse (Result Http.Error ())
+
+
 httpErrorToString : Http.Error -> String
 httpErrorToString err =
     case err of
@@ -79,6 +84,14 @@ update msg model =
         InputMemo s ->
             ( { model | memo = s }, Cmd.none )
 
+        GotServerResponse res ->
+            case res of
+                Ok _ ->
+                    redirectBack model
+
+                Err err ->
+                    ( { model | serverError = httpErrorToString err }, Cmd.none )
+
         Submit ->
             let
                 newErrors =
@@ -91,6 +104,11 @@ update msg model =
 
             else
                 ( model, Cmd.none )
+
+
+redirectBack : Model -> ( Model, Cmd Msg )
+redirectBack model =
+    ( model, Nav.back model.key 1 )
 
 
 formValidation : Errors -> Bool
@@ -139,7 +157,8 @@ view model =
     div []
         [ navBar
         , form [ class "card-form", onSubmit Submit ]
-            [ div [ class "form-header" ]
+            [ div [] [ text model.serverError ]
+            , div [ class "form-header" ]
                 [ button [ class "lerge-plus-button" ]
                     [ i [ class "fas fa-plus" ] []
                     , text "学習カードを追加"
