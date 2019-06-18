@@ -1,12 +1,12 @@
 module Page.Top exposing (Model, Msg(..), init, update, view)
 
 import Components.Loading exposing (loadingView)
-import Data.Card exposing (Card, cardCountTuple, cardsDecoder, dummyCard)
+import Data.Card exposing (Card, LoadStatus(..), cardCountTuple, cardsDecoder, dummyCard)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http
-import Port exposing (cacheCards)
+import Port exposing (cacheCards, fetchCards)
 
 
 init : ( Model, Cmd Msg )
@@ -14,7 +14,7 @@ init =
     ( { loading = Loading
       , cards = [ dummyCard, dummyCard ]
       }
-    , fetchCards
+    , fetchCards ()
     )
 
 
@@ -24,33 +24,15 @@ type alias Model =
     }
 
 
-type LoadStatus
-    = Loading
-    | LoadedCards (List Card)
-    | Failed Http.Error
-
-
 type Msg
-    = Receive (Result Http.Error (List Card))
+    = NoOp
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Receive (Ok cards) ->
-            ( { model | loading = LoadedCards [], cards = cards }, cacheCards cards )
-
-        -- FIXME api未実装のためここでcacheCardsを呼び出す
-        Receive (Err e) ->
-            ( { model | loading = Failed e }, cacheCards model.cards )
-
-
-fetchCards : Cmd Msg
-fetchCards =
-    Http.get
-        { url = "http://localhost:8080/graphiql"
-        , expect = Http.expectJson Receive cardsDecoder
-        }
+        NoOp ->
+            ( model, Cmd.none )
 
 
 view : Model -> Html Msg
@@ -69,14 +51,7 @@ viewLoading model content =
         Loading ->
             loadingView
 
-        -- FIXME エラー画面を表示すべきだがAPI未実装なので仮置き
-        Failed e ->
-            div []
-                [ text "エラーだぴょん orz"
-                , content
-                ]
-
-        LoadedCards c ->
+        LoadedCards ->
             content
 
 
