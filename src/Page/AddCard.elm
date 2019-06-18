@@ -40,6 +40,23 @@ type Msg
     | InputQuestion String
     | InputAnswer String
     | InputMemo String
+httpErrorToString : Http.Error -> String
+httpErrorToString err =
+    case err of
+        Http.BadUrl _ ->
+            "BadUrl"
+
+        Http.Timeout ->
+            "Timeout"
+
+        Http.NetworkError ->
+            "NetworkError"
+
+        Http.BadStatus _ ->
+            "BadStatus"
+
+        Http.BadBody s ->
+            "BadBody: " ++ s
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
